@@ -1,0 +1,58 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2);  
+int sensor8=8;
+int sensor9=9;
+
+void setup()
+{
+  pinMode(sensor8,INPUT);
+  pinMode(sensor9,INPUT);
+  pinMode(2,OUTPUT);
+  pinMode(3,OUTPUT);
+  pinMode(4,OUTPUT);
+  lcd.init();                     
+  lcd.backlight();
+  lcd.clear();
+  }
+void loop()
+
+{
+  int IR1=digitalRead(sensor8);
+int IR2=digitalRead(sensor9);
+  if(IR1==0) 
+  {
+  lcd.setCursor(0,0);
+  lcd.print("LED STATUS : ");
+  digitalWrite(2,HIGH);
+  lcd.setCursor(1,1);
+  lcd.print("1");
+  digitalWrite(3,LOW);
+  digitalWrite(4,LOW);
+  lcd.clear();
+ 
+  
+}
+else if(IR2==0)
+{
+  lcd.print("LED STATUS : ");
+  digitalWrite(3,HIGH);
+  lcd.setCursor(1,1);
+  lcd.print("2");
+  digitalWrite(2,LOW);
+  digitalWrite(4,LOW);
+  lcd.clear();
+
+ 
+}
+else{
+  lcd.print("LED STATUS : ");
+  digitalWrite(4,HIGH);
+  lcd.setCursor(1,1);
+  lcd.print("3");
+  digitalWrite(2,LOW);
+   digitalWrite(3,LOW);
+  lcd.clear();
+  }
+}
